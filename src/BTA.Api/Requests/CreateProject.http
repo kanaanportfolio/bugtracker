@@ -1,0 +1,18 @@
+@host=http://localhost:5202
+
+POST {{host}}/api/v2/projects
+Content-Type: application/json
+
+{
+    "name": "Juniors"
+}
+###
+PUT {{host}}/api/v2/projects/11
+Content-Type: application/json
+
+{
+    "id": 11,
+    "name": "Sophs"
+}
+###
+DELETE {{host}}/api/v2/projects/2

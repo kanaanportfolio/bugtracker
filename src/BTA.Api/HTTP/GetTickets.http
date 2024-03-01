@@ -1,0 +1,3 @@
+@host=http://localhost:5202
+
+GET {{host}}/api/v2/tickets

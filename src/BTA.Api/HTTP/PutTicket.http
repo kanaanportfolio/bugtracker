@@ -1,0 +1,10 @@
+@host=http://localhost:5202
+
+PUT {{host}}/api/tickets/1
+Content-Type: application/json
+
+{
+    "Id": 1,
+    "Title": "My first bug",
+    "DueDate": "2020-01-01"
+}

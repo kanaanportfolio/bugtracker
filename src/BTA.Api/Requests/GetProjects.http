@@ -1,0 +1,17 @@
+@host=http://localhost:5202
+
+GET {{host}}/api/v2/projects
+
+
+###
+
+
+GET {{host}}/api/v2/projects/1
+
+###
+
+GET {{host}}/api/v2/projects/3/tickets
+
+###
+
+GET {{host}}/api/v2/projects/2/tickets/3

@@ -1,0 +1,22 @@
+@host=http://localhost:5202
+
+POST {{host}}/api/v2/tickets
+Content-Type: application/json
+
+{
+    "Title": "Impossible bug",
+    "ProjectId": 4
+}
+
+###
+
+POST {{host}}/api/v2/tickets
+Content-Type: application/json
+
+{
+    "Title": "hello",
+    "ProjectId": 1
+}
+    //"Owner": "Kanaan",
+    //"DueDate": "2025-01-01",
+    //"EnteredDate": "2025-02-02"

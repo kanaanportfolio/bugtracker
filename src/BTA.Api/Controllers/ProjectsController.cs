@@ -54,15 +54,15 @@ public class ProjectsController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult Create(Project newProject)
+    public async Task<ActionResult> Create(Project newProject)
     {
         _dbContext.Add(newProject);
-        _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
         return CreatedAtAction(nameof(GetProject), new { pid = newProject.Id }, newProject);
     }
 
     [HttpPut("{id}")]
-    public ActionResult Update(int id, Project updatedProject)
+    public async Task<ActionResult> Update(int id, Project updatedProject)
     {
         if (id != updatedProject.Id)
         {
@@ -73,13 +73,14 @@ public class ProjectsController : ControllerBase
         {
             return NotFound();
         }
-        _dbContext.Entry(updatedProject).State = EntityState.Modified;
-        _dbContext.SaveChangesAsync();
+        found.Name = updatedProject.Name;
+        // _dbContext.Entry(updatedProject).State = EntityState.Modified;
+        await _dbContext.SaveChangesAsync();
         return NoContent();
     }
 
     [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         var project = _dbContext.Projects.Find(id);
         if (project == null)
@@ -87,7 +88,7 @@ public class ProjectsController : ControllerBase
             return NotFound();
         }
         _dbContext.Entry(project).State = EntityState.Deleted;
-        _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
         return NoContent();
     }
 }

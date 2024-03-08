@@ -1,6 +1,6 @@
 using System.Dynamic;
 using System.Reflection.Emit;
-using BTA.Api.QueryFilters;
+using BTA.Application.PluginInterfaces;
 using BTA.Core.Models;
 using BTA.Repository.ApiClient;
 

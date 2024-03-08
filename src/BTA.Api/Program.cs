@@ -25,6 +25,7 @@ if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development
         options.UseInMemoryDatabase("Bugs");
     });
 }
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -44,6 +45,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod());
 app.MapControllers();
 
 app.Run();

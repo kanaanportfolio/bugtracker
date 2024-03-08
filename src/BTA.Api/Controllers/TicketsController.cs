@@ -1,4 +1,6 @@
+using System.Reflection.Emit;
 using BTA.Api.Filters;
+using BTA.Api.QueryFilters;
 using BTA.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +19,29 @@ public class TicketsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
+    public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets([FromQuery] QueryFilter filter)
     {
-        var tickets = _dbContext.Tickets;
+        IQueryable<Ticket> tickets = _dbContext.Tickets;
         if (tickets == null)
         {
             return NotFound();
+        }
+        if (filter != null)
+        {
+            if (filter.TitleSearch != null)
+            {
+                tickets = tickets.Where(t => t.Title.Equals(filter.TitleSearch));
+            }
+            if (filter.DescriptionFilter != null)
+            {
+                tickets = tickets.Where(t => 
+                    t.Description.Contains(filter.DescriptionFilter, StringComparison.OrdinalIgnoreCase));
+            }
+            if (filter.TitleFilter != null)
+            {
+                tickets = tickets.Where(t =>
+                    t.Title.Contains(filter.TitleFilter, StringComparison.OrdinalIgnoreCase));
+            }
         }
         return Ok(await tickets.ToListAsync());
     }

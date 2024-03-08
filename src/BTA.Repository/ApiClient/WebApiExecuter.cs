@@ -24,15 +24,7 @@ public class WebApiExecuter : IWebApiExecuter
 
     public async Task<T> InvokeGet<T>(string uri)
     {
-        HttpRequestMessage msg = new HttpRequestMessage(HttpMethod.Get, $"{_baseUrl}/{uri}");
-
-        var response = await _httpClient.SendAsync(msg);
-        Console.WriteLine(response);
-        await CheckSuccess(response);
-        var json = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(json);
         return await _httpClient.GetFromJsonAsync<T>($"{_baseUrl}/{uri}");
-        // response.EnsureSuccessStatusCode();
     }
 
     public async Task<T> InvokePost<T>(string uri, T obj)

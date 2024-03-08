@@ -1,9 +1,8 @@
+using BTA.Application.PluginInterfaces;
 using BTA.Core.Models;
 using BTA.Repository.ApiClient;
 
 namespace BTA.Repository;
-
-
 
 public class ProjectRepository : IProjectRepository
 {

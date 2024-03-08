@@ -1,10 +1,9 @@
 using BTA.Application.PluginInterfaces;
 using BTA.Core.Models;
-using BTA.Repository;
 
 namespace BTA.Application;
 
-public class ProjectsScreenUseCases
+public class ProjectsScreenUseCases : IProjectsScreenUseCases
 {
     private readonly IProjectRepository _repo;
 
@@ -12,8 +11,8 @@ public class ProjectsScreenUseCases
     {
         _repo = repo;
     }
-    public IEnumerable<Project> ViewProjectsAsync()
+    public async Task<IEnumerable<Project>> ViewProjectsAsync()
     {
-        return _repo.GetProjectsAsync();
+        return await _repo.GetProjectsAsync();
     }
 }

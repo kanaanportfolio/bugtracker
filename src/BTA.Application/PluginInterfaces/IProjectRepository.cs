@@ -1,3 +1,5 @@
+using BTA.Core.Models;
+
 namespace BTA.Application.PluginInterfaces;
 
 public interface IProjectRepository

@@ -1,0 +1,9 @@
+@page "/projects/{pid:int}/tickets"
+
+@if (Tickets != null)
+{
+    foreach (var ticket in Tickets)
+    {
+        @ticket.Title;
+    }
+}

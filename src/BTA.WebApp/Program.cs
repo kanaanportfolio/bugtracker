@@ -12,7 +12,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddTransient<IProjectsScreenUseCases, ProjectsScreenUseCases>();
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
-builder.Services.AddSingleton<IWebApiExecuter>(sp => new WebApiExecuter(
-    "http://localhost:5202", new HttpClient()));
+builder.Services.AddTransient<ITicketsScreenUseCases, TicketsScreenUseCases>();
+builder.Services.AddTransient<ITicketRepository, TicketRepository>();
+
+builder.Services.AddSingleton<IWebApiExecuter>(sp => 
+    new WebApiExecuter("http://localhost:5202", new HttpClient()));
    
 await builder.Build().RunAsync();

@@ -9,6 +9,6 @@ public interface IProjectRepository
     Task<int> CreateProjectAsync(Project project);
     Task UpdateProjectAsync(int id, Project project);
     Task DeleteProjectAsync(int id);
-    Task<IEnumerable<Ticket>> GetProjectTickets(int pid);
-    Task<Ticket> GetProjectTicket(int pid, int tid);
+    Task<IEnumerable<Ticket>> GetProjectTicketsAsync(int pid);
+    Task<Ticket> GetProjectTicketAsync(int pid, int tid);
 }

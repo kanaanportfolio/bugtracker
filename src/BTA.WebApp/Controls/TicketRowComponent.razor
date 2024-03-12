@@ -1,0 +1,14 @@
+@if (Ticket == null)
+{ return; }
+
+<tr>
+    <td>@Ticket.Title</td>
+    <td>@Ticket.Owner</td>
+    <td>@(Ticket.EnteredDate.HasValue ? Ticket.EnteredDate : string.Empty)</td>
+    <td>@(Ticket.DueDate.HasValue ? Ticket.DueDate : string.Empty)</td>
+</tr>
+
+@code {
+    [Parameter]
+    public Core.Models.Ticket Ticket { get; set; }
+}

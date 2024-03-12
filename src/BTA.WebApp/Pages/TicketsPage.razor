@@ -1,0 +1,29 @@
+@page "/search"
+@using BTA.WebApp.Controls
+
+<input type="text"
+       @bind="titleSearch" />
+<input type="text"
+       @bind="titleFilter" />
+<input type="text"
+       @bind="descriptionFilter" />
+<button type="button"
+        @onclick="HandleClick">Search</button>
+
+@if (Tickets != null)
+{
+	<table class="table">
+		<thead>
+			<th>Title</th>
+			<th>Owner</th>
+			<th>Report Date</th>
+			<th>Due Date</th>
+		</thead>
+		<tbody>
+			@foreach (var ticket in Tickets)
+			{
+                <TicketRowComponent Ticket=ticket />
+			}
+		</tbody>
+	</table>
+}

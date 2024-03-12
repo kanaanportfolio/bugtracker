@@ -1,9 +1,20 @@
 @page "/projects/{pid:int}/tickets"
+@using BTA.WebApp.Controls
 
 @if (Tickets != null)
 {
-    foreach (var ticket in Tickets)
-    {
-        @ticket.Title;
-    }
+	<table class="table">
+		<thead>
+			<th>Title</th>
+			<th>Owner</th>
+			<th>Report Date</th>
+			<th>Due Date</th>
+		</thead>
+		<tbody>
+			@foreach (var ticket in Tickets)
+			{
+				<TicketRowComponent Ticket=ticket />
+			}
+		</tbody>
+	</table>
 }

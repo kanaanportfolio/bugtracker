@@ -38,13 +38,13 @@ public class ProjectRepository : IProjectRepository
         await _executer.InvokeDelete($"api/v2/projects/{id}");
     }
 
-    public Task<IEnumerable<Ticket>> GetProjectTicketsAsync(int pid)
+    public async Task<IEnumerable<Ticket>> GetProjectTicketsAsync(int pid)
     {
-        return _executer.InvokeGet<IEnumerable<Ticket>>($"api/v2/projects/{pid}/tickets");
+        return await _executer.InvokeGet<IEnumerable<Ticket>>($"api/v2/projects/{pid}/tickets");
     }
 
-    public Task<Ticket> GetProjectTicketAsync(int pid, int tid)
+    public async Task<Ticket> GetProjectTicketAsync(int pid, int tid)
     {
-        return _executer.InvokeGet<Ticket>($"api/v2/projects/{pid}/tickets/{tid}");
+        return await _executer.InvokeGet<Ticket>($"api/v2/projects/{pid}/tickets/{tid}");
     }
 }

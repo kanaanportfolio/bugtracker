@@ -1,5 +1,6 @@
-@page "/projects/{pid:int}/tickets"
 @using BTA.WebApp.Controls
+
+@page "/projects/{pid:int}/tickets"
 
 @if (Tickets != null)
 {
@@ -13,7 +14,7 @@
 		<tbody>
 			@foreach (var ticket in Tickets)
 			{
-				<TicketRowComponent Ticket=ticket />
+				<TicketRowComponent Ticket="ticket" />
 			}
 		</tbody>
 	</table>

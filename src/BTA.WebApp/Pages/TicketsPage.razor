@@ -1,14 +1,37 @@
-@page "/search"
 @using BTA.WebApp.Controls
 
-<input type="text"
-       @bind="titleSearch" />
-<input type="text"
-       @bind="titleFilter" />
-<input type="text"
-       @bind="descriptionFilter" />
-<button type="button"
-        @onclick="HandleClick">Search</button>
+@page "/search"
+
+<div class="row">
+	<div class="col-auto">
+		<input 
+			type="checkbox"
+			@bind="ownerChecked"
+			@onclick="ToggleOwner" />
+	</div>
+	<div class="col-auto">
+		<input 
+			type="text"
+        	@bind="titleSearch" />
+	</div>
+	<div class="col-auto">
+		<input 
+			type="text"
+			@bind="titleFilter" />
+	</div>	
+	<div class="col-auto">
+		<input 
+			type="text"
+       		@bind="descriptionFilter" />
+	</div>
+	<div class="col-auto">
+		<button 
+			type="button"
+			@onclick="HandleClick">
+			Search
+		</button>
+	</div>
+</div>
 
 @if (Tickets != null)
 {

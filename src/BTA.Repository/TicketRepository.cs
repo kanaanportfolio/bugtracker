@@ -27,6 +27,12 @@ public class TicketRepository : ITicketRepository
     {
         return await executer.InvokeGet<Ticket>($"api/v2/tickets/{id}");
     }
+
+    public async Task<IEnumerable<Ticket>> GetTicketsByOwnerAsync(string Owner)
+    {
+        return await executer.InvokeGet<IEnumerable<Ticket>>($"api/v2/tickets/owners/{Owner}");
+    }
+
     public async Task<int> CreateTicketAsync(Ticket ticket)
     {
         var created = await executer.InvokePost<Ticket>("api/v2/tickets", ticket);

@@ -1,14 +1,21 @@
 @if (Ticket == null)
-{ return; }
+{
+    return;
+}
 
 <tr>
-    <td>@Ticket.Title</td>
+    <td>
+        <NavLink href=@($"/tickets/{Ticket.Id}")>
+            @Ticket.Title
+        </NavLink>
+    </td>
     <td>@Ticket.Owner</td>
     <td>@(Ticket.EnteredDate.HasValue ? Ticket.EnteredDate : string.Empty)</td>
     <td>@(Ticket.DueDate.HasValue ? Ticket.DueDate : string.Empty)</td>
 </tr>
 
-@code {
+@code 
+{
     [Parameter]
-    public Core.Models.Ticket Ticket { get; set; }
+    public Ticket Ticket { get; set; }
 }

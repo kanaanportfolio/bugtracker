@@ -1,0 +1,83 @@
+@page "/tickets/{id:int}"
+
+@if (Ticket != null)
+{   
+    <EditForm 
+        Model=@Ticket
+        OnValidSubmit="Submit">
+        <DataAnnotationsValidator />
+        <div class="mb-3">
+            <label 
+                class="form-label">
+                Title
+            </label>
+            <InputText 
+                class="form-control"
+                @bind-Value="Ticket.Title" />
+        </div>
+        <div class="mb-3">
+            <label 
+                class="form-label">
+                Description
+            </label>
+            <InputText 
+                class="form-control"
+                @bind-Value="Ticket.Description" />
+        </div>
+        <div class="mb-3">
+            <label 
+                class="form-label">
+                Owner
+            </label>
+            <InputText 
+                class="form-control"
+                @bind-Value="Ticket.Owner"
+                readonly />
+        </div>
+        <div class="mb-3">
+            <label 
+                class="form-label">
+                Due Date
+            </label>
+            <InputDate
+                class="form-control"
+                @bind-Value="Ticket.DueDate" />
+        </div>
+        <div class="mb-3">
+            <label 
+                class="form-label">
+                Entered Date
+            </label>
+            <InputDate
+                class="form-control"
+                @bind-Value="Ticket.EnteredDate" />
+        </div>
+        <ValidationSummary />
+        <button
+            type="submit"
+            class="btn btn-primary" >
+            Submit
+        </button>
+    </EditForm>
+}
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+
+    public Ticket Ticket { get; set; }
+
+    [Inject]
+    public ITicketsScreenUseCases TicketsScreenUseCases { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Ticket = await TicketsScreenUseCases.ViewTicket(Id);
+    }
+
+    private async Task Submit()
+    {
+        await TicketsScreenUseCases.EditTicket(Id, Ticket);
+    }
+}

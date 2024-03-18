@@ -22,9 +22,30 @@ public class BtaDbContext : DbContext
         modelBuilder.Entity<Ticket>().HasData(
             new List<Ticket>
             {
-                new Ticket { Id = 1, Title = "Tricky bug", ProjectId = 1 },
-                new Ticket { Id = 2, Title = "Simple bug", ProjectId = 1 },
-                new Ticket { Id = 3, Title = "Obvious bug", ProjectId = 2}
+                new Ticket {
+                    Id = 9,
+                    Title = "Tricky bug",
+                    ProjectId = 1,
+                    Owner = "Kanaan",
+                    DueDate = new DateTime(2002, 2, 2),
+                    EnteredDate = new DateTime(2004, 2, 2)
+                },
+                new Ticket {
+                    Id = 10,
+                    Title = "Simple bug",
+                    ProjectId = 1,
+                    Owner = "Frank",
+                    DueDate = new DateTime(2003, 2, 2),
+                    EnteredDate = new DateTime(2001, 2, 2)
+                },
+                new Ticket {
+                    Id = 11,
+                    Title = "Obvious bug",
+                    ProjectId = 2,
+                    Owner = "Frank",
+                    DueDate = new DateTime(2002, 2, 2),
+                    EnteredDate = new DateTime(2004, 2, 2)
+                }
             }
         );
         

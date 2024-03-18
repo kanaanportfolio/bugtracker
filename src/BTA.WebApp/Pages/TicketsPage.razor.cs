@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using BTA.Application;
 using BTA.Core.Models;
 using Microsoft.AspNetCore.Components;
@@ -17,7 +18,52 @@ public partial class TicketsPage
 
     private async Task HandleClick()
     {
-        var filter = $"?titlesearch={titleSearch}&titlefilter={titleFilter}&descriptionfilter={descriptionFilter}";
-        Tickets = await ticketsScreenUseCases.ViewTicketsFiltered(filter);
+        if (int.TryParse(titleSearch + titleFilter + descriptionFilter, out var id))
+        {
+            Ticket ticket = await ticketsScreenUseCases.ViewTicket(id);
+            Tickets = new List<Ticket>{ ticket };
+        }
+        else
+        {
+            var filter = $"?titlesearch={titleSearch}&titlefilter={titleFilter}&descriptionfilter={descriptionFilter}";
+            Tickets = await ticketsScreenUseCases.ViewTicketsFiltered(filter);
+        }
+    }
+
+    private bool ownerChecked;
+
+    public bool OwnerChecked
+    {
+        get => ownerChecked;
+        set
+        {
+            ownerChecked = value;
+            Task.Run(async () => 
+            {
+                if (ownerChecked)
+                {
+                    Tickets = await ticketsScreenUseCases.ViewOwnerTickets("Kanaan");
+                }
+                else
+                {
+                    Tickets = await ticketsScreenUseCases.ViewTicketsFiltered(null);
+                }
+                StateHasChanged();
+            });
+        }
+    }
+
+    private async void ToggleOwner()
+    {
+        ownerChecked = !ownerChecked;
+        if (ownerChecked)
+        {
+            Tickets = await ticketsScreenUseCases.ViewOwnerTickets("Kanaan");
+        }
+        else
+        {
+            Tickets = await ticketsScreenUseCases.ViewTicketsFiltered(null);
+        }
+        StateHasChanged();
     }
 }

@@ -46,7 +46,6 @@ public class TicketsController : ControllerBase
         return Ok(await tickets.ToListAsync());
     }
 
-
     [HttpGet]
     [Route("{id}")]
     public ActionResult<Ticket> GetTicket(int id)
@@ -57,6 +56,12 @@ public class TicketsController : ControllerBase
             return NotFound();
         }
         return Ok(ticket);
+    }
+
+    [HttpGet("owners/{owner}")]
+    public ActionResult<IEnumerable<Ticket>> GetTicketsByOwner(string owner)
+    {
+        return Ok(_dbContext.Tickets.Where(t => t.Owner.Equals(owner)));
     }
 
     [HttpPost]

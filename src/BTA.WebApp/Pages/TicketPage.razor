@@ -1,4 +1,5 @@
 @page "/tickets/{id:int}"
+@page "/tickets/add"
 
 @if (Ticket != null)
 {   
@@ -25,6 +26,15 @@
                 @bind-Value="Ticket.Description" />
         </div>
         <div class="mb-3">
+            <label
+                class="form-label">
+                Project Id
+            </label>
+            <InputNumber
+                class="form-control"
+                @bind-Value=Ticket.ProjectId />
+        </div>
+        <div class="mb-3">
             <label 
                 class="form-label">
                 Owner
@@ -32,7 +42,7 @@
             <InputText 
                 class="form-control"
                 @bind-Value="Ticket.Owner"
-                readonly />
+                 />
         </div>
         <div class="mb-3">
             <label 
@@ -64,20 +74,30 @@
 @code
 {
     [Parameter]
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
-    public Ticket Ticket { get; set; }
+    public Ticket Ticket { get; set; } = new();
 
     [Inject]
     public ITicketsScreenUseCases TicketsScreenUseCases { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        Ticket = await TicketsScreenUseCases.ViewTicket(Id);
+        if (Id != null)
+        {
+            Ticket = await TicketsScreenUseCases.ViewTicket(Id.Value);
+        }
     }
 
     private async Task Submit()
     {
-        await TicketsScreenUseCases.EditTicket(Id, Ticket);
+        if (Id == null)
+        {
+            await TicketsScreenUseCases.AddTicket(Ticket);
+        }
+        else
+        {
+            await TicketsScreenUseCases.EditTicket(Id.Value, Ticket);
+        }
     }
 }

@@ -42,4 +42,9 @@ public class TicketsScreenUseCases : ITicketsScreenUseCases
     {
         await _ticketRepo.UpdateTicketAsync(id, ticket);
     }
+
+    public async Task AddTicket(Ticket ticket)
+    {
+        await _ticketRepo.CreateTicketAsync(ticket);
+    }
 }

@@ -9,4 +9,5 @@ public interface ITicketsScreenUseCases
     Task<Ticket> ViewTicket(int id);
     Task<IEnumerable<Ticket>> ViewOwnerTickets(string Owner);
     Task EditTicket(int id, Ticket ticket);
+    Task AddTicket(Ticket ticket);
 }
